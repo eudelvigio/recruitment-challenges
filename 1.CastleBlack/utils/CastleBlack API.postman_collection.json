@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "18d1316e-a16d-4f66-ba35-02ed8a6bf5a2",
+		"name": "CastleBlack API",
+		"description": "Sample of all possible requests for CastleBlack API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "List players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/list",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"name\": \"Jona Snowa\", \r\n    \"age\": 23, \r\n    \"health\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/player",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get player by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Arm player with object from his bag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/arm/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"arm",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kill player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/kill",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"kill"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Objects",
+			"item": [
+				{
+					"name": "Create new object",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Longsword\",\r\n    \"value\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/object",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get object by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/object/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": -100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/object/1/upgrade",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object",
+								"1",
+								"upgrade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/object/1/destroy",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object",
+								"1",
+								"destroy"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "f6e054fe-2890-48d4-93cb-426e79d98854",
+			"key": "BASE_URL",
+			"value": "http://localhost:8080"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -15,9 +15,118 @@ const objects = [
   { id: 4, name: "potion", value: +20 }
 ];
 
-// EXAMPLE ENDPOINT: LIST ALL OBJECTS
-api.get("/objects", function(req, res) {
+// PLAYERS ENDPOINTS
+
+// List all players
+api.get("/player/list", function(req, res) {
+  res.json(players);
+});
+
+// Create new player
+api.post("/player", function(req, res) {
+  if (req.body.name && req.body.age && !req.body.id) {
+    // He considerado usar reduce para obtener el máx, pero esto me ha parecido más claro y limpio
+    const newId = Math.max.apply(Math, players.map(p => p.id)) + 1;
+    const player = {
+      id: newId,
+      name: req.body.name,
+      age: req.body.age,
+      health: 100,
+      bag: []
+    }
+    players.push(player);
+  }
+  res.json(players);
+});
+
+// Get player by id
+api.get("/player/:id", function(req, res) {
+  const player = players.find(p => p.id === parseInt(req.params.id));
+  if (player) {
+    res.json(player);
+  } else {
+    res.status(404).send({});
+  }
+});
+
+// Arm player with a object from his bag
+api.put("/player/:id/arm/:objectId", function(req, res) {
+  const player = players.find(p => p.id === parseInt(req.params.id));
+  if (player) {
+    if (player.bag.includes(parseInt(req.params.objectId))) {
+      player['armed'] = parseInt(req.params.objectId);
+      res.json(player);
+    } else {
+      res.status(400).send();
+    }
+  } else {
+    res.status(404).send();
+  }
+});
+
+// Kill player
+api.put("/player/:id/kill", function(req, res) {
+  const player = players.find(p => p.id === parseInt(req.params.id));
+  if (player) {
+    player.health = 0;
+    res.json(player);
+  } else {
+    res.status(404).send({});
+  }
+});
+
+// OBJECTS ENDPOINTS
+
+// Create new object
+api.post("/object", function(req, res) {
+  if (req.body.name && req.body.value && !req.body.id) {
+    const newId = Math.max.apply(Math, objects.map(o => o.id)) + 1;
+    const object = {
+      id: newId,
+      name: req.body.name,
+      value: parseInt(req.body.value)
+    }
+    objects.push(object);
+  }
   res.json(objects);
 });
+
+// Get object by id
+api.get("/object/:id", function(req, res) {
+  const object = objects.find(o => o.id === parseInt(req.params.id));
+  if (object) {
+    res.json(object);
+  } else {
+    res.status(404).send({});
+  }
+});
+
+// Upgrade object
+api.put("/object/:id/upgrade", function(req, res) {
+  const object = objects.find(o => o.id === parseInt(req.params.id));
+  if (object) {
+    if (!isNaN(req.body.value)) {
+      object.value += req.body.value;
+      res.json(object);
+    } else {
+      res.status(400).send({});
+    }
+  } else {
+    res.status(404).send({});
+  }
+});
+
+// Destroy object
+api.put("/object/:id/destroy", function(req, res) {
+  const object = objects.find(o => o.id === parseInt(req.params.id));
+  if (object) {
+    object['destroyed'] = true;
+    res.json(object);
+  } else {
+    res.status(404).send({});
+  }
+});
+
+
 
 module.exports = api;

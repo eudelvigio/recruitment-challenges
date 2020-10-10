@@ -25,18 +25,20 @@ api.get("/player/list", function(req, res) {
 // Create new player
 api.post("/player", function(req, res) {
   if (req.body.name && req.body.age && !req.body.id) {
-    // He considerado usar reduce para obtener el máx, pero esto me ha parecido más claro y limpio
+    // Maybe reduce can be used, but I think this is more understandable
     const newId = Math.max.apply(Math, players.map(p => p.id)) + 1;
-    const player = {
+    const newPlayer = {
       id: newId,
       name: req.body.name,
       age: req.body.age,
       health: 100,
       bag: []
     }
-    players.push(player);
+    players.push(newPlayer);
+    res.json(newPlayer);
+  } else {
+    res.status(400).send({});
   }
-  res.json(players);
 });
 
 // Get player by id
@@ -81,14 +83,16 @@ api.put("/player/:id/kill", function(req, res) {
 api.post("/object", function(req, res) {
   if (req.body.name && req.body.value && !req.body.id) {
     const newId = Math.max.apply(Math, objects.map(o => o.id)) + 1;
-    const object = {
+    const newObject = {
       id: newId,
       name: req.body.name,
       value: parseInt(req.body.value)
     }
-    objects.push(object);
+    objects.push(newObject);
+    res.json(newObject);
+  } else {
+    res.status(400).send({});
   }
-  res.json(objects);
 });
 
 // Get object by id

@@ -15,6 +15,21 @@ const objects = [
   { id: 4, name: "potion", value: +20 }
 ];
 
+const users = [
+  { login: "mol", password: "123"}
+];
+
+// BASIC AUTHENTICATION
+api.use((req, res, next) => {
+  const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+  const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
+  if (login && password && users.find(u => u.login === login && u.password === password)) {
+    return next();
+  }
+  res.status(401).send('Unauthorized');
+});
+
+
 // PLAYERS ENDPOINTS
 
 // List all players
@@ -77,6 +92,7 @@ api.put("/player/:id/kill", function(req, res) {
   }
 });
 
+
 // OBJECTS ENDPOINTS
 
 // Create new object
@@ -130,7 +146,5 @@ api.put("/object/:id/destroy", function(req, res) {
     res.status(404).send({});
   }
 });
-
-
 
 module.exports = api;

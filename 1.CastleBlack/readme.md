@@ -1,3 +1,25 @@
+# Questions found
+
+1. ./app.js Line 14
+
+        app.disable("x-powered-by"); // QUESTION: any reason is this line here?
+
+The header "x-powered-by" while is not part of the standard headers of a response, is used to send on some servers like express information about what application is working in the server to answer the sent request.
+
+The main reason I can imagine is to avoid sending unnecesary information, as it can help possible attackers to find info from the server.
+
+One extra point to consider is that disabling the header without doing more stuff, is that there are many extra signals which points this to be a express server, so if hiding that kind of info is important, extra work should be done.
+
+2. ./src/router.js Line 6
+
+        // QUESTION: why this endpoint blocks the app?
+
+Seems that the endpoint is not using correctly the response object, as it is setting a value inside a body property of the response.
+
+The main reason the endpoint is blocking the app is because express needs that ".send" method of the response object to answer the request. There are some other methods as ".json" which also can be used, but as no one of them is being called, express never send the response.
+
+---
+
 # REST API implementation
 
 This is a Game of Thrones inspired REST API game. You are responsible to create the engine of the game.

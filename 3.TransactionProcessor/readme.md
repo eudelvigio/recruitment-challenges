@@ -1,3 +1,12 @@
+# Tasks comments
+
+- Have a look to the code. Do you miss any class?
+
+After having a look to the code, the principal class I miss is a model class, making easier to work with repetitive similar data, as transactions are. It simplifies validation work, and make sure the properties we are checking exists, while no other data is necessary for the processor
+
+
+---
+
 # Transactions Processor
 
 We want to develop a new transactions processor library to complete online payments. **TransactionProcessor.js** file contains the code scaffolding of our new payments engine.

@@ -5,6 +5,10 @@
 After having a look to the code, the principal class I miss is a model class, making easier to work with repetitive similar data, as transactions are. It simplifies validation work, and make sure the properties we are checking exists, while no other data is necessary for the processor
 
 
+- Complete **./src/TransactionProcessor.js** class.
+
+I decided to create a Transaction class, with transaction required properties, and one helper method implementing transaction validation logic. After it, I implemented TransactionProcessor class, trying to use the most clear code on it, and the info from the comments on the file
+
 ---
 
 # Transactions Processor

@@ -5,6 +5,7 @@ class TransactionProcessor {
 
   constructor(transactions) {
     this.transactions = transactions;
+    this.precission = 2;
   }
 
   print(tx) {
@@ -51,9 +52,19 @@ class TransactionProcessor {
     return this;
   }
 
-  // Return the total amount of current transactions array
+  // Return the total amount of current valid transactions array
   sum() {
-    return this.transactions.reduce((acc, t) => acc + t.amount, 0);
+    const isValid = TransactionProcessor.isValidTransaction;
+    const validTransactions = this.transactions.filter(t => isValid(t));
+
+    const preciseAmount = validTransactions.reduce((accumulator, transaction) => {
+      // We use precission to power 10 the amount here, to work with integers only
+      const preciseAmount = Math.round(transaction.amount * Math.pow(10, this.precission));
+      return accumulator + preciseAmount;
+    }, 0);
+
+    // And here we recuperate the original number of decimal elements
+    return preciseAmount / Math.pow(10, this.precission);
   }
 
   // Property returning current transactions array length

@@ -44,7 +44,9 @@ class TransactionProcessor {
     if (!Array.isArray(filters)) return;
 
     filters.map(f => {
-      if (f instanceof Function) this.transactions = this.transactions.filter(f);
+      if (f instanceof Function)
+        this.transactions = this.transactions.filter(f);
+        
     });
     return this;
   }

@@ -57,14 +57,15 @@ class TransactionProcessor {
     const isValid = TransactionProcessor.isValidTransaction;
     const validTransactions = this.transactions.filter(t => isValid(t));
 
+    const powerOfTen = Math.pow(10, this.precission);
     const preciseAmount = validTransactions.reduce((accumulator, transaction) => {
       // We use precission to power 10 the amount here, to work with integers only
-      const preciseAmount = Math.round(transaction.amount * Math.pow(10, this.precission));
+      const preciseAmount = Math.round(transaction.amount * powerOfTen);
       return accumulator + preciseAmount;
     }, 0);
 
     // And here we recuperate the original number of decimal elements
-    return preciseAmount / Math.pow(10, this.precission);
+    return preciseAmount / powerOfTen;
   }
 
   // Property returning current transactions array length

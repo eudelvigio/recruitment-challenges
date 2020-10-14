@@ -55,6 +55,10 @@ class TransactionProcessor {
   sum() {
     return this.transactions.reduce((acc, t) => acc + t.amount, 0);
   }
+
+  get length() {
+    return this.transactions.length;
+  }
 }
 
 module.exports = TransactionProcessor;

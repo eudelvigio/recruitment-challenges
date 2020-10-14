@@ -56,6 +56,7 @@ class TransactionProcessor {
     return this.transactions.reduce((acc, t) => acc + t.amount, 0);
   }
 
+  // Property returning current transactions array length
   get length() {
     return this.transactions.length;
   }

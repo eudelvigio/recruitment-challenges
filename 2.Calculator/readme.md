@@ -53,7 +53,13 @@ If the application is allowed to be partitioned because its usage is not coupled
 
 I added only one demostration test of how I would do it, as I'm running low of time.
 
+5. Can you improve the UI/UX?
 
+I did several improvements to UI and UX, like formatting numbers, allowing scroll on result viewer, and an effect when button is pressed.
+
+Also I add keyboard interaction on this task, as I consider it a UX improvement.
+
+As mentioned before, as this is a legacy app, I understand there are people using it, so I think, without extra information, that would be risky to modify current layout, maybe can exist some reason to be like is. I planned to make a new layout, and maybe a layout switcher, increasing the major version of the app, as it includes breaking changes. As it is not the case, I only increase minVersion on package json for the improvements done
 
 ---
 

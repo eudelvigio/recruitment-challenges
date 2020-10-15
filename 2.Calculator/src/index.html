@@ -98,7 +98,9 @@
       clear = el("#clear"), // C button
       dot = el("#dot"), // Dot button
       writerNum = "", // Variable to store and simplify number adding
+      currentNumDecimals = 0, // Number of decimals of current writing number
       oldNum = 0, // First number
+      oldNumDecimals = 0, // Number of decimals of First number
       resultNum, // Result
       operator, // Batman
       dotPressed = false; 
@@ -109,9 +111,11 @@
         // If a result was displayed, reset number
         writerNum = this.getAttribute("data-num");
         resultNum = 0;
+        currentNumDecimals = 0;
       } else {
         writerNum += this.getAttribute("data-num");
       }
+      if (dotPressed) currentNumDecimals++;
 
       viewer.innerHTML = writerNum; // Display current number
     };
@@ -133,6 +137,9 @@
     // When: Operator is clicked. Pass number to oldNum and save operator
     var moveNum = function() {
       oldNum = parseFloat(writerNum);
+      oldNumDecimals = currentNumDecimals;
+      currentNumDecimals = 0;
+
       writerNum = "";
       dotPressed = false;
       
@@ -144,20 +151,31 @@
     // When: Equals is clicked. Calculate result
     var displayNum = function() {
       var theNum = parseFloat(writerNum);
+
+      // We get decimal count to allow integer operations, 
+      // which is safer than with floats
+      const maxNumDecimals = Math.max(currentNumDecimals, oldNumDecimals);
+      const powerOfTenToApply = Math.pow(10, maxNumDecimals);
+      const theNumAsInteger = theNum * powerOfTenToApply;
+      const oldNumAsInteger = oldNum * powerOfTenToApply;
+
       // Perform operation
       switch (operator) {
         case "minus":
-          resultNum = oldNum - theNum;
+          resultNum = oldNumAsInteger - theNumAsInteger;
           break;
 
         case "plus":
-          resultNum = oldNum + theNum;
+          resultNum = oldNumAsInteger + theNumAsInteger;
           break;
 
         // If equal is pressed without an operator, keep number and continue
         default:
-          resultNum = theNum;
+          resultNum = theNumAsInteger;
       }
+
+      // And now we divide by powerOfTenToApply
+      resultNum = resultNum / powerOfTenToApply;
 
       // If NaN or Infinity returned
       if (!isFinite(resultNum)) {
@@ -176,6 +194,7 @@
 
       // Now reset oldNum & keep result
       oldNum = 0;
+      oldNumDecimals = 0;
       writerNum = resultNum.toString();
       dotPressed = false;
     };
@@ -183,6 +202,7 @@
     // When: Clear button is pressed. Clear everything
     var clearAll = function() {
       oldNum = 0;
+      oldNumDecimals = 0;
       writerNum = "";
       dotPressed = false;
 

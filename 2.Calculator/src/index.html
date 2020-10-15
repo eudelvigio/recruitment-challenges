@@ -101,6 +101,7 @@
       equals = el("#equals"), // Equal button
       nums = el(".num"), // List of numbers
       ops = el(".ops"), // List of operators
+      clear = el("#clear"), // C button
       theNum = "", // Current number
       oldNum = "", // First number
       resultNum, // Result
@@ -195,6 +196,6 @@
     equals.onclick = displayNum;
 
     // Add click event to clear button
-    el("#clear").onclick = clearAll;
+    clear.onclick = clearAll;
   })();
 </script>

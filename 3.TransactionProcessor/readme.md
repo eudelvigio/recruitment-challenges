@@ -25,6 +25,16 @@ To solve it, I decide to add a new property to the class, precision, which indic
 
 About including more tests, I added some tests regarding parameters, mainly when instantiate the processor, as it can leads to some errors. In fact, I detect if a not array is given at constructor, as there was not any validation of the data, causes exceptions on the app, so I updated the code.
 
+
+- Do you know the pattern used by TransactionProcessor class?
+
+It is a fluent interface, it allows method chaining because with almost every method on the class return the class instance, which includes too the methods:
+´´´
+processor.getTransactionsByBrand('visa').getTransactionsByCurrency('EUR').filterTransaction([(t) => t.amount < 10]);
+´´´
+
+Is easy to read, but have some drawbacks, mainly because is mixing fluent methods with not fluent methods, and also, as I mentioned before, I think method naming can be a bit better. The issue with the test, which make me add a property "length" to the class, can be too related to this naming.
+
 ---
 
 # Transactions Processor

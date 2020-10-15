@@ -67,8 +67,8 @@
     float: left;
     line-height: 3em;
     text-align: right;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     width: 7.5em;
     height: 3em;
   }
@@ -124,7 +124,7 @@
       }
       if (dotPressed) currentNumDecimals++;
 
-      viewer.innerHTML = writerNum; // Display current number
+      viewer.innerHTML = new Intl.NumberFormat(["en"]).format(writerNum); // Display current number
     };
 
     // When: Dot is clicked. Set dotpressed true
@@ -136,7 +136,7 @@
         }
         writerNum += ".";
 
-        viewer.innerHTML = writerNum; // Display current number
+        viewer.innerHTML = new Intl.NumberFormat(["en"]).format(writerNum); // Display current number
         dotPressed = true;
       }
     }
@@ -206,7 +206,7 @@
         }
       } else {
         // Display result, finally!
-        displayResult(resultNum);
+        displayPrettyResult(resultNum);
       }
 
       // Now reset oldNum & keep result
@@ -229,6 +229,12 @@
     // Private helper to set result where is needed
     function displayResult(result) {
       viewer.innerHTML = result;
+      equals.setAttribute("data-result", result);
+    }
+
+    // Private helper to show pretty result
+    function displayPrettyResult(result) {
+      viewer.innerHTML = new Intl.NumberFormat(["en"]).format(result);
       equals.setAttribute("data-result", result);
     }
 

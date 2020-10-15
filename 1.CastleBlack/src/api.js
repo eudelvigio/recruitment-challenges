@@ -19,10 +19,16 @@ const users = [
   { login: "mol", password: "123"}
 ];
 
+// Helper function to extract user and password from request header
+function getLoginAndPasswordFromRequest(req) {
+  const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
+  return Buffer.from(b64auth, 'base64').toString().split(':');
+}
+
 // BASIC AUTHENTICATION
 api.use((req, res, next) => {
-  const b64auth = (req.headers.authorization || '').split(' ')[1] || ''
-  const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
+  const [login, password] = getLoginAndPasswordFromRequest(req);
+
   if (login && password && users.find(u => u.login === login && u.password === password)) {
     return next();
   }

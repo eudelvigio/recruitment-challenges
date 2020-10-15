@@ -226,6 +226,54 @@
       displayResult(0);
     };
 
+    // Bind keyboard events to calculator
+    var onKeyPress = function(e) {
+      switch (e.key) {
+        // Numbers
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+        case "0":
+          document.querySelector("[data-num='" + e.key + "']").click();
+          break;
+        case ".":
+          document.querySelector("#dot").click();
+          break;
+
+        // Operations
+        case "+":
+          document.querySelector("[data-ops='plus']").click();
+          break;
+        case "-":
+          document.querySelector("[data-ops='minus']").click();
+          break;
+        case "/":
+          document.querySelector("[data-ops='divide']").click();
+          break;
+        case "*":
+          document.querySelector("[data-ops='multiply']").click();
+          break;
+
+        // Equals
+        case "=":
+        case "Enter":
+          document.querySelector("#equals").click();
+          break;
+
+        // C
+        case "c":
+        case "C":
+          document.querySelector("#clear").click();
+          break;
+      }
+    }
+
     // Private helper to set result where is needed
     function displayResult(result) {
       viewer.innerHTML = result;
@@ -258,5 +306,8 @@
 
     // Add click event to dot button
     dot.onclick = addDot;
+
+    // Add keyboard interaction
+    document.body.onkeypress = onKeyPress;
   })();
 </script>

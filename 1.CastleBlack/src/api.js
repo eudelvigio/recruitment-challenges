@@ -36,6 +36,11 @@ api.use((req, res, next) => {
 });
 
 
+// EXAMPLE ENDPOINT: LIST ALL OBJECTS
+api.get("/objects", function(req, res) {
+  res.json(objects);
+});
+
 // PLAYERS ENDPOINTS
 
 // List all players

@@ -1,3 +1,37 @@
+# Task comments
+
+1. Code review: please list all good/bad practices you find in this application.
+
+To make a more real-life example, I created a new branch, I deleted index.html contents and then recovered it, and I added all code review comments on it too, marking the lines where I found errors, and some general issues. https://github.com/eudelvigio/recruitment-challenges/pull/2
+
+## Good Practices
+
+- I like the pseudo component approach, the index.html file has all needed html, js and css
+- JS script part is well documented, maybe a bit overkill, but is better than no comments at all
+- Max line length is 82, improving visualization on small screens and resolutions
+- Correct camelCase on all js
+
+## Bad Practices
+
+- Index.html is a long file, forcing to make long scroll (>200 lines)
+- If it is a HTML document, must have mandatory html, head and body tags
+- In HTML, every id must be different from another, and all buttons share same id
+- The `el` function can be a bit confusing, as is using two differents dom functions based on the first character of the string parameter. Maybe can reduce a bit the amount of code, but you must look on the function to know how it works
+- The oldNum, theNum and resultNum shouldn't store strings, the type of the variable should be consistent. While it can have some almost-advantages, as simplify the part of creating a big number, is something that should be avoided, as it can lead to errors and unexpected issues on the code. This bad practice is used in many parts of the file
+- At the end of the file, line 199, the `el` function is being used, but is better to have an extra declaration on the header (lines 100 - 108) than to call a confusing function here
+- I would prefer that all colors are hexadecimal or RGB, not mixing it. Is only the background color on line 29, but I prefer it consistent.
+
+## Errors
+
+- Line 18, while number shown is "0", its data-num attribute has "3", so every time I click on "0" button, it puts a "3" on the result
+- Line 22, while number shown is "3", its data-num attribute has "0", so every time I click on "3" button, it puts a "0" on the result
+- Under styles, is using cascades under the .calculator class (lines 42-56), which in css are not allowed, and there are not any build instructions nor "lang" attribute on style tag
+- Under displayNum function (which by the way can be a bit confusing name), under the switch in line 140, it seems to have the operations switched, application is going to subtract when pressing "+", and sum when pressing "-"
+- Calculator allows to put unlimited decimal separators ".", while maths only should allow one. This also leads to error with parseFloat functions.
+
+
+---
+
 # Payvision calculator
 
 In this exercise you are given the legacy code of Payvision Calculator web app. Maintainance and new features development is your responsability.

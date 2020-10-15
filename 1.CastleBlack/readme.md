@@ -18,6 +18,14 @@ Seems that the endpoint is not using correctly the response object, as it is set
 
 The main reason the endpoint is blocking the app is because express needs that ".send" method of the response object to answer the request. There are some other methods as ".json" which also can be used, but as no one of them is being called, express never send the response.
 
+# Comments
+
+I implemented all requires tasks, but while I'm running out of time, I only did 2 points from the bonus part.
+
+I understood that health value is a percentage, as all players have the same value, so I don't allow to create players with a specified health, it will be 100.
+Maybe the basic authentication is a bit unclear, but I think is enough verbose with the comments to be understood.
+
+
 ---
 
 # REST API implementation

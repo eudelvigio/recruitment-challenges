@@ -27,7 +27,7 @@ describe("Api endpoints", () => {
     app.use(api);
   });
   test("It should have an endpoint to get a player list", async () => {
-    const response = await request(app).get("/player/list");
+    const response = await request(app).get("/player/list").auth("mol", "123");
 
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe("application/json");
@@ -36,7 +36,7 @@ describe("Api endpoints", () => {
   });
   test("It should have an endpoint to get particular player info", async () => {
     const playerId = 1;
-    const response = await request(app).get(`/player/${playerId}`);
+    const response = await request(app).get(`/player/${playerId}`).auth("mol", "123");
     
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe("application/json");
@@ -52,6 +52,7 @@ describe("Api endpoints", () => {
     }
     const response = await request(app)
       .post("/player")
+      .auth("mol", "123")
       .send(newPlayer);
     
     expect(response.statusCode).toBe(200);
@@ -68,7 +69,7 @@ describe("Api endpoints", () => {
   test("It should have an endpoint allowing a player to arm an object from his bag", async () => {
     const playerId = 1;
     const objectId = 1;
-    const response = await request(app).put(`/player/${playerId}/arm/${objectId}`);
+    const response = await request(app).put(`/player/${playerId}/arm/${objectId}`).auth("mol", "123");
     
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe("application/json");
@@ -82,7 +83,7 @@ describe("Api endpoints", () => {
   
   test("It should have an endpoint to kill a player", async () => {
     const playerId = 1;
-    const response = await request(app).put(`/player/${playerId}/kill`);
+    const response = await request(app).put(`/player/${playerId}/kill`).auth("mol", "123");
     
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe("application/json");
@@ -100,6 +101,7 @@ describe("Api endpoints", () => {
     }
     const response = await request(app)
       .post("/object")
+      .auth("mol", "123")
       .send(newObject);
     
     expect(response.statusCode).toBe(200);
@@ -113,7 +115,7 @@ describe("Api endpoints", () => {
 
   test("It should have an endpoint to get an object by id", async () => {
     const objectId = 1;
-    const response = await request(app).get(`/object/${objectId}`);
+    const response = await request(app).get(`/object/${objectId}`).auth("mol", "123");
     
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe("application/json");
@@ -128,11 +130,12 @@ describe("Api endpoints", () => {
         value: -50
     }
     const objectId = 1;
-    const responseOldObject = await request(app).get(`/object/${objectId}`);
+    const responseOldObject = await request(app).get(`/object/${objectId}`).auth("mol", "123");
     const oldObject = responseOldObject.body;
 
     const response = await request(app)
       .put(`/object/${objectId}/upgrade`)
+      .auth("mol", "123")
       .send(upgrade);
     
     expect(response.statusCode).toBe(200);
@@ -147,7 +150,8 @@ describe("Api endpoints", () => {
   test("It should have an endpoint to destroy existing objects", async () => {
     const objectId = 1;
     const response = await request(app)
-      .put(`/object/${objectId}/destroy`);
+      .put(`/object/${objectId}/destroy`)
+      .auth("mol", "123");
     
     expect(response.statusCode).toBe(200);
     expect(response.type).toBe("application/json");

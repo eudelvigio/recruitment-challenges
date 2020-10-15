@@ -4,6 +4,9 @@ class TransactionProcessor {
   // QUESTION: COMPLETE ALL CLASS FUNCTIONS TO PASS THE TESTS
 
   constructor(transactions) {
+    if (!Array.isArray(transactions)) {
+      transactions = [];
+    }
     this.transactions = transactions;
     this.precission = 2;
   }

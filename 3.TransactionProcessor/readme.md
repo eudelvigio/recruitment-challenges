@@ -7,7 +7,9 @@ After having a look to the code, the principal class I miss is a model class, ma
 
 - Complete **./src/TransactionProcessor.js** class.
 
-I decided to create a Transaction class, with transaction required properties, and one helper method implementing transaction validation logic. After it, I implemented TransactionProcessor class, trying to use the most clear code on it, and the info from the comments on the file
+I decided to create a Transaction class, with transaction required properties, and one helper method implementing transaction validation logic. After it, I implemented TransactionProcessor class, trying to use the most clear code on it, and the info from the comments on the file.
+
+This maybe can be a personal opinion, but when using methods starting with "get", I usually thinks that this kind of method is going to return the requested data, not the same object. Also, filterInvalidTransactions, only by its name, is a bit confusing for me (does it should drop invalid transactions, or give only valid transactions).
 
 
 - Make sure all tests pass. Would you include more tests?
@@ -20,6 +22,8 @@ I refactorized TransactionProcessor class to make all tests ok, and I have some 
 
 3. Also, after having the sum with only valid transaction, I found an issue with number operation, having wrong results. The underlying issue is, like on 10-based numbers exist some values which can't be fully represented (i.e, 10/3 can't be exactly represented with a 10-based number), this also happens with double precision float numbers, which is the format used in js behind the scenes.
 To solve it, I decide to add a new property to the class, precision, which indicates the max number of significant decimals will be taken in care. There are some drawbacks, as more precision, less big can numbers be, so if this processor should work with very big numbers while maintaining a high precission, extra actions should be done, BigInts can increase the precision and number bigness, or maybe using a library like decimal.js or similar.
+
+About including more tests, I added some tests regarding parameters, mainly when instantiate the processor, as it can leads to some errors. In fact, I detect if a not array is given at constructor, as there was not any validation of the data, causes exceptions on the app, so I updated the code.
 
 ---
 

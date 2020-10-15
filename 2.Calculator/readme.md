@@ -45,6 +45,16 @@ Also, something I didn't explain before is that I think that, as a legacy app, t
 
 As an update was done to the app, and it is a improvement, we should increase package version to 1.3.1
 
+4. How would do you test this app?
+
+As it is something like an html page, I think best way to test application in its current state is to use JSDOM with jest, having the capability of test clicks and expect results.
+
+If the application is allowed to be partitioned because its usage is not coupled to being only one html page, would be interesant to make unit tests too for the js part
+
+I added only one demostration test of how I would do it, as I'm running low of time.
+
+
+
 ---
 
 # Payvision calculator

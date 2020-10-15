@@ -37,9 +37,11 @@ Also, to avoid the issue about decimal numbers operation in js, I changed the ap
 
 3. Add divide and multiply operations.
 
-I decide to use the float numbers directly, because divide and multiply operations can be risky with some numbers, and I think I should add too much logic for achieve.
+I decide to use the float numbers directly, because divide and multiply operations can be risky with some numbers, and I think I should add too much logic for achieve it with the integer version.
 
 Also, something I didn't explain before is that I think that, as a legacy app, the button order can be important for current users, so I prefer maintain current layout, and add new buttons on the remaining space of the calculator
+
+As an update was done to the app, and it is a improvement, we should increase package version to 1.3.1
 
 ---
 

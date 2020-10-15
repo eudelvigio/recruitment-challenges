@@ -30,6 +30,11 @@ To make a more real-life example, I created a new branch, I deleted index.html c
 - Calculator allows to put unlimited decimal separators ".", while maths only should allow one. This also leads to error with parseFloat functions.
 
 
+2. It seems the app is buggy... Could you fix it?
+
+I rewrite the application trying to fix detected issues while maintaining current structure. While at start I was thinking on dropping accumulator string for number, at the end I realise that js logic is too hard, and can lead to some extra errors (management of adding and showing "." in particular), so what I done is to assure that every variable maintain its type, and only in needed moments I make the conversion.
+Also, to avoid the issue about decimal numbers operation in js, I changed the application counting decimal numbers to perform only integer operations.
+
 ---
 
 # Payvision calculator

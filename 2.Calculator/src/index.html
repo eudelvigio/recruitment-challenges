@@ -86,22 +86,16 @@
 
 <script>
   (function() {
-    // Shortcut to get elements
-    var el = function(element) {
-      if (element.charAt(0) === "#") {
-        // If passed an ID...
-        return document.querySelector(element); // ... returns single element
-      }
-
-      return document.querySelectorAll(element); // Otherwise, returns a nodelist
-    };
+    // Shortcuts to get elements
+    const el = document.querySelector;
+    const els = document.querySelectorAll;
 
     // Variables
     var viewer = el("#viewer"), // Calculator screen where result is displayed
       equals = el("#equals"), // Equal button
-      nums = el(".num"), // List of numbers
-      ops = el(".ops"), // List of operators
-      clear = el("#clear"), // C button
+      nums = els(".num"), // List of numbers
+      ops = els(".ops"), // List of operators
+      clear = els("#clear"), // C button
       theNum = "", // Current number
       oldNum = "", // First number
       resultNum, // Result

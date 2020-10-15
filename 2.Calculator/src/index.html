@@ -22,6 +22,9 @@
   <button class="num" data-num="3">3</button>
   <button id="dot">.</button>
   <button id="equals" class="equals" data-result="">=</button>
+  
+  <button data-ops="multiply" class="ops">*</button>
+  <button data-ops="divide" class="ops">%</button>
 </div>
 
 <style>
@@ -163,19 +166,29 @@
       switch (operator) {
         case "minus":
           resultNum = oldNumAsInteger - theNumAsInteger;
+          resultNum = resultNum / powerOfTenToApply;
           break;
 
         case "plus":
           resultNum = oldNumAsInteger + theNumAsInteger;
+          resultNum = resultNum / powerOfTenToApply;
+          break;
+
+          // When multiplying, we use directly the float numbers
+        case "multiply":
+          resultNum = oldNum * theNum;
+          break;
+
+          // When dividing, we use directly the float numbers
+        case "divide":
+          resultNum = oldNum / theNum;
           break;
 
         // If equal is pressed without an operator, keep number and continue
         default:
-          resultNum = theNumAsInteger;
+          resultNum = theNumAsInteger / powerOfTenToApply;
       }
 
-      // And now we divide by powerOfTenToApply
-      resultNum = resultNum / powerOfTenToApply;
 
       // If NaN or Infinity returned
       if (!isFinite(resultNum)) {

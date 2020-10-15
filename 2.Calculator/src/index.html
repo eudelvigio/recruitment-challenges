@@ -97,7 +97,7 @@
       ops = els(".ops"), // List of operators
       clear = el("#clear"), // C button
       dot = el("#dot"), // Dot button
-      writerNum = "", // Current number
+      writerNum = "", // Variable to store and simplify number adding
       oldNum = 0, // First number
       resultNum, // Result
       operator, // Batman
@@ -119,8 +119,9 @@
     // When: Dot is clicked. Set dotpressed true
     var addDot = function() {
       if (!dotPressed) {
-        if (writerNum.length === 0) {
+        if (resultNum) {
           writerNum = "0";
+          resultNum = 0;
         }
         writerNum += ".";
 

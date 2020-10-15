@@ -20,7 +20,7 @@
   <button class="num" data-num="2">2</button>
 
   <button class="num" data-num="3">3</button>
-  <button class="num" data-num=".">.</button>
+  <button id="dot">.</button>
   <button id="equals" class="equals" data-result="">=</button>
 </div>
 
@@ -87,38 +87,54 @@
 <script>
   (function() {
     // Shortcuts to get elements
-    const el = document.querySelector;
-    const els = document.querySelectorAll;
+    const el = document.querySelector.bind(document);
+    const els = document.querySelectorAll.bind(document);
 
     // Variables
     var viewer = el("#viewer"), // Calculator screen where result is displayed
       equals = el("#equals"), // Equal button
       nums = els(".num"), // List of numbers
       ops = els(".ops"), // List of operators
-      clear = els("#clear"), // C button
-      theNum = "", // Current number
-      oldNum = "", // First number
+      clear = el("#clear"), // C button
+      dot = el("#dot"), // Dot button
+      writerNum = "", // Current number
+      oldNum = 0, // First number
       resultNum, // Result
-      operator; // Batman
+      operator, // Batman
+      dotPressed = false; 
 
     // When: Number is clicked. Get the current number selected
     var setNum = function() {
       if (resultNum) {
         // If a result was displayed, reset number
-        theNum = this.getAttribute("data-num");
-        resultNum = "";
+        writerNum = this.getAttribute("data-num");
+        resultNum = 0;
       } else {
-        // Otherwise, add digit to previous number (this is a string!)
-        theNum += this.getAttribute("data-num");
+        writerNum += this.getAttribute("data-num");
       }
 
-      viewer.innerHTML = theNum; // Display current number
+      viewer.innerHTML = writerNum; // Display current number
     };
+
+    // When: Dot is clicked. Set dotpressed true
+    var addDot = function() {
+      if (!dotPressed) {
+        if (writerNum.length === 0) {
+          writerNum = "0";
+        }
+        writerNum += ".";
+
+        viewer.innerHTML = writerNum; // Display current number
+        dotPressed = true;
+      }
+    }
 
     // When: Operator is clicked. Pass number to oldNum and save operator
     var moveNum = function() {
-      oldNum = theNum;
-      theNum = "";
+      oldNum = parseFloat(writerNum);
+      writerNum = "";
+      dotPressed = false;
+      
       operator = this.getAttribute("data-ops");
 
       equals.setAttribute("data-result", ""); // Reset result in attr
@@ -126,10 +142,7 @@
 
     // When: Equals is clicked. Calculate result
     var displayNum = function() {
-      // Convert string input to numbers
-      oldNum = parseFloat(oldNum);
-      theNum = parseFloat(theNum);
-
+      var theNum = parseFloat(writerNum);
       // Perform operation
       switch (operator) {
         case "minus":
@@ -149,30 +162,37 @@
       if (!isFinite(resultNum)) {
         if (isNaN(resultNum)) {
           // If result is not a number; set off by, eg, double-clicking operators
-          resultNum = "You broke it!";
+          displayResult("You broke it!");
         } else {
           // If result is infinity, set off by dividing by zero
-          resultNum = "Look at what you've done";
+          displayResult("Look at what you've done");
           el("#calculator").classList.add("broken"); // Break calculator
         }
+      } else {
+        // Display result, finally!
+        displayResult(resultNum);
       }
-
-      // Display result, finally!
-      viewer.innerHTML = resultNum;
-      equals.setAttribute("data-result", resultNum);
 
       // Now reset oldNum & keep result
       oldNum = 0;
-      theNum = resultNum;
+      writerNum = resultNum.toString();
+      dotPressed = false;
     };
 
     // When: Clear button is pressed. Clear everything
     var clearAll = function() {
-      oldNum = "";
-      theNum = "";
-      viewer.innerHTML = "0";
-      equals.setAttribute("data-result", resultNum);
+      oldNum = 0;
+      writerNum = "";
+      dotPressed = false;
+
+      displayResult(0);
     };
+
+    // Private helper to set result where is needed
+    function displayResult(result) {
+      viewer.innerHTML = result;
+      equals.setAttribute("data-result", result);
+    }
 
     /* The click events */
 
@@ -191,5 +211,8 @@
 
     // Add click event to clear button
     clear.onclick = clearAll;
+
+    // Add click event to dot button
+    dot.onclick = addDot;
   })();
 </script>

@@ -35,6 +35,12 @@ To make a more real-life example, I created a new branch, I deleted index.html c
 I rewrite the application trying to fix detected issues while maintaining current structure. While at start I was thinking on dropping accumulator string for number, at the end I realise that js logic is too hard, and can lead to some extra errors (management of adding and showing "." in particular), so what I done is to assure that every variable maintain its type, and only in needed moments I make the conversion.
 Also, to avoid the issue about decimal numbers operation in js, I changed the application counting decimal numbers to perform only integer operations.
 
+3. Add divide and multiply operations.
+
+I decide to use the float numbers directly, because divide and multiply operations can be risky with some numbers, and I think I should add too much logic for achieve.
+
+Also, something I didn't explain before is that I think that, as a legacy app, the button order can be important for current users, so I prefer maintain current layout, and add new buttons on the remaining space of the calculator
+
 ---
 
 # Payvision calculator

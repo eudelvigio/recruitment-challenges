@@ -220,9 +220,46 @@
 			"protocolProfileBehavior": {}
 		}
 	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "mol",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a5e03be6-0646-40c0-b9cc-1168db594e65",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "35d957d4-677c-4136-b35d-f10f737fad06",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "f6e054fe-2890-48d4-93cb-426e79d98854",
+			"id": "b7c0b200-2f97-4c3e-ac89-a5711b3049c3",
 			"key": "BASE_URL",
 			"value": "http://localhost:8080"
 		}

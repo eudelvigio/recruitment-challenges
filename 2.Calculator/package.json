@@ -3,7 +3,7 @@
   "version": "1.4.1",
   "description": "Code challenge for fullstack vacancy at Payvision. REST API exercise. Code review exercise",
   "scripts": {
-    "serve": "http-server -p 8082 -o http://localhost:8082/src/index.html",
+    "serve": "http-server -p 8082 -o /src/index.html",
     "test": "jest"
   },
   "author": "Payvision",

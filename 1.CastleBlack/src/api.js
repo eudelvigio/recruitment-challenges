@@ -158,6 +158,10 @@ api.put("/player/:id/attack", function(req, res) {
 
     anotherPlayer.health += attackObject.value;
 
+    // Health is percentage
+    if (anotherPlayer.health > 100) {
+      anotherPlayer.health = 100;
+    }
     res.json(player);
   }
 
@@ -183,9 +187,13 @@ api.put("/player/:id/use", function(req, res) {
   } else {
     const useObject = objects.find(o => o.id === useCommand.object);
     const anotherPlayer = players.find(p => p.id === useCommand.against);
-
+    console.log(useObject.value);
     anotherPlayer.health += useObject.value;
 
+    // Health is percentage
+    if (anotherPlayer.health > 100) {
+      anotherPlayer.health = 100;
+    }
     res.json(player);
   }
 

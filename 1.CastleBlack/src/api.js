@@ -221,7 +221,7 @@ api.put("/player/:id/steal/:stolenId", function(req, res) {
 // Kill player
 api.put("/player/:id/resurrect", function(req, res) {
   const player = players.find(p => p.id === parseInt(req.params.id));
-  if (player) {
+  if (player && player.health <= 0) {
     player.health = 100;
     res.json(player);
   } else {

@@ -20,11 +20,12 @@ The main reason the endpoint is blocking the app is because express needs that "
 
 # Comments
 
-I implemented all requires tasks, but while I'm running out of time, I only did 2 points from the bonus part.
+I implemented all requires tasks, and all proposed bonuses.
 
 I understood that health value is a percentage, as all players have the same value, so I don't allow to create players with a specified health, it will be 100.
 Maybe the basic authentication is a bit unclear, but I think is enough verbose with the comments to be understood.
 
+I decided to allow users to have more than one same element, as there is no limitation, seems reasonable to be ok, and simplifies development. The same happens with using a property to indicate destroyed objects instead of deleting them.
 
 ---
 

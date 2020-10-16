@@ -130,6 +130,34 @@ api.put("/player/:id/pickup/:objectId", function(req, res) {
   }
 });
 
+// Attack player with object from bag
+api.put("/player/:id/attack", function(req, res) {
+  const playerId = parseInt(req.params.id);
+
+  const attackCommand = req.body;
+
+  // if no defender or object, error
+  if (!players.some(p => p.id === attackCommand.defender)) {
+    res.status(400).send({});
+    return;
+  }
+
+  const player = players.find(p => p.id === playerId);
+  // if player not exist or not has the object, error
+  if (!player || !player.bag.includes(attackCommand.object)) {
+    res.status(400).send({});
+    return;
+  } else {
+    const attackObject = objects.find(o => o.id === attackCommand.object);
+    const anotherPlayer = players.find(p => p.id === attackCommand.defender);
+
+    anotherPlayer.health += attackObject.value;
+
+    res.json(player);
+  }
+
+});
+
 
 // OBJECTS ENDPOINTS
 

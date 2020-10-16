@@ -153,6 +153,9 @@
 
     // When: Operator is clicked. Pass number to oldNum and save operator
     var moveNum = function() {
+      if (oldNum !== undefined) {
+        displayNum();
+      }
       oldNum = parseFloat(writerNum);
       oldNumDecimals = currentNumDecimals;
       currentNumDecimals = 0;

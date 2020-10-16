@@ -61,14 +61,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/player/1",
+							"raw": "{{BASE_URL}}/api/player/2",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"player",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -151,7 +151,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n    \"defender\": 2, \r\n    \"object\": 1\r\n}",
+							"raw": "{ \r\n    \"against\": 1, \r\n    \"object\": 4\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,7 +159,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/player/1/attack",
+							"raw": "{{BASE_URL}}/api/player/1/use",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -167,7 +167,7 @@
 								"api",
 								"player",
 								"1",
-								"attack"
+								"use"
 							]
 						}
 					},
@@ -179,7 +179,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/player/1/resurrect",
+							"raw": "{{BASE_URL}}/api/player/1/steal/2",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -187,7 +187,8 @@
 								"api",
 								"player",
 								"1",
-								"resurrect"
+								"steal",
+								"2"
 							]
 						}
 					},
@@ -219,7 +220,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/player/1/resurrect",
+							"raw": "{{BASE_URL}}/api/player/1/pickup/2",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -227,7 +228,8 @@
 								"api",
 								"player",
 								"1",
-								"resurrect"
+								"pickup",
+								"2"
 							]
 						}
 					},

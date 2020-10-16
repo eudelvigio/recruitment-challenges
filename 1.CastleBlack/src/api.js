@@ -130,7 +130,7 @@ api.put("/player/:id/pickup/:objectId", function(req, res) {
   }
 });
 
-// Attack player with object from bag
+// Attack *another* player with object from bag
 api.put("/player/:id/attack", function(req, res) {
   const playerId = parseInt(req.params.id);
 
@@ -138,6 +138,11 @@ api.put("/player/:id/attack", function(req, res) {
 
   // if no defender or object, error
   if (!players.some(p => p.id === attackCommand.defender)) {
+    res.status(400).send({});
+    return;
+  }
+
+  if (playerId === attackCommand.defender) {
     res.status(400).send({});
     return;
   }

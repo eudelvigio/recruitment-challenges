@@ -134,7 +134,10 @@
       }
       if (dotPressed) currentNumDecimals++;
 
-      viewer.innerHTML = numberFormatter(writerNum); // Display current number
+      // We get integer and float, to make "0"s appear as decimal when are at right
+      const [integerPart, floatPart] = writerNum.split(".");
+
+      viewer.innerHTML = numberFormatter(integerPart) + (floatPart ? '.' + floatPart : ''); // Display current number
     };
 
     // When: Dot is clicked. Set dotpressed true

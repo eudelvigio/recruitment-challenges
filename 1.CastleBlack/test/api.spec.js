@@ -178,18 +178,18 @@ describe("Bonus Api endpoints", () => {
     const existingObject = 2;
     const newObjectId = 1;
 
-    const responseBad = await request(app).get(`/player/${playerId}/pickup/${existingObject}`).auth("mol", "123");
+    const responseBad = await request(app).put(`/player/${playerId}/pickup/${existingObject}`).auth("mol", "123");
 
     expect(responseBad.statusCode).toBe(400);
 
-    const responseOk = await request(app).get(`/player/${playerId}/pickup/${newObjectId}`).auth("mol", "123");
+    const responseOk = await request(app).put(`/player/${playerId}/pickup/${newObjectId}`).auth("mol", "123");
 
-    expect(responseOk.statusCode).toBe(400);
+    expect(responseOk.statusCode).toBe(200);
 
-    expect(response.type).toBe("application/json");
-    expect(response.body).toBeInstanceOf(Object);
+    expect(responseOk.type).toBe("application/json");
+    expect(responseOk.body).toBeInstanceOf(Object);
 
-    const player = response.body;
+    const player = responseOk.body;
     checkPlayerDataTypes(player);
     expect(player.bag).toHaveLength(2);
     expect(player.bag).toStrictEqual([1,1]);

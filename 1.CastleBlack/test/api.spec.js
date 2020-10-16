@@ -203,7 +203,6 @@ describe("Bonus Api endpoints", () => {
     const attackObject = attackObjectReq.body;
     const attackObjectIdNotInBag = 2;
 
-
     const badAttackCommand = {
         defender: defenderId,
         object: attackObjectIdNotInBag
@@ -271,6 +270,28 @@ describe("Bonus Api endpoints", () => {
     checkPlayerDataTypes(player);
     expect(player.id).toBe(playerId);
     expect(player.health).toBe(100);
+  });
+
+  test("It should have an endpoint to use a object", async () => {
+    const playerUserId = 1;
+    const userObjectReq = await request(app).get(`/object/4`).auth("mol", "123");
+    const userObject = userObjectReq.body;
+
+    const useCommand = {
+        against: playerUserId,
+        object: userObject.id
+    }
+
+    const responseOk = await request(app)
+      .put(`/player/${playerUserId}/use`)
+      .auth("mol", "123")
+      .send(useCommand);
+    
+    expect(responseOk.statusCode).toBe(200);
+
+    const player = responseOk.body;
+    checkPlayerDataTypes(player);    
+    expect(player.health).toBe(100 + userObject.value);
   });
 
 });

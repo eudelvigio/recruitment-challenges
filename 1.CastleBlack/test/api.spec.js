@@ -257,4 +257,20 @@ describe("Bonus Api endpoints", () => {
     expect(stolen.bag).toHaveLength(0);
     
   });
+
+
+  test("It should have an endpoint to resurrect one player", async () => {
+    const playerId = 1;
+    const responseKill = await request(app).put(`/player/${playerId}/kill`).auth("mol", "123");
+    const responseResurrect = await request(app).put(`/player/${playerId}/resurrect`).auth("mol", "123");
+    
+    expect(responseResurrect.statusCode).toBe(200);
+    expect(responseResurrect.type).toBe("application/json");
+
+    const player = responseResurrect.body;
+    checkPlayerDataTypes(player);
+    expect(player.id).toBe(playerId);
+    expect(player.health).toBe(100);
+  });
+
 });

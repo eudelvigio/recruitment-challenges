@@ -47,13 +47,13 @@ As an update was done to the app, and it is a improvement, we should increase pa
 
 4. How would do you test this app?
 
-As it is something like an html page, I think best way to test application in its current state is to use JSDOM with jest, having the capability of test clicks and expect results.
+As it is something like an html page, I think best way to test application in its current state is to use JSDOM with jest, having the capability of test clicks and expect results, it has something from both unit tests, and end to end tests, and I find this approach ideal for this scenario
 
-If the application is allowed to be partitioned because its usage is not coupled to being only one html page, would be interesant to make unit tests too for the js part
+If the application is allowed to be partitioned because its usage is not coupled to being only one html page, would be interesant to make functional tests too for the js part
 
-I added only one demostration test of how I would do it, as I'm running low of time.
+I added tests for all buttons, and also one of each operation, trying to manage limit cases, and it helped me to implement multiply and division with the integer system. It has some drawbacks, result number can have more decimals than the sum of operand decimals, so while we avoid issues with numbers in js, we have lost precission. Maybe the best way is to add a decimal number library, like decimal.js to deal with this issues easily.
 
-
+Also, I have refactorized a bit the app, like one `el` to header, and also the way to manage decimals. And I fixed some vulnerabilities found on installed package
 
 ---
 

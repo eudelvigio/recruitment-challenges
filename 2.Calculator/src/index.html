@@ -98,8 +98,15 @@
 <script>
   (function() {
     // Shortcuts to get elements
-    const el = document.querySelector.bind(document);
-    const els = document.querySelectorAll.bind(document);
+    var el = document.querySelector.bind(document);
+    var els = document.querySelectorAll.bind(document);
+
+    // Defensive way to get a valid number formatter
+    var numberFormatter = function (input) { return input; }
+    if (Intl) {
+      numberFormatter = new Intl.NumberFormat(["en"], {maximumFractionDigits: maxDecimals}).format;
+    }
+
 
     // Variables
     var viewer = el("#viewer"), // Calculator screen where result is displayed
@@ -116,7 +123,6 @@
       resultNum, // Result
       operator, // Batman,
       maxDecimals = 10, // maximum allowed number of decimals
-      numberFormatter = new Intl.NumberFormat(["en"], {maximumFractionDigits: maxDecimals}).format, // formatter
       debounceButtons = false, // debouncer for numbers
       dotPressed = false; 
 
@@ -135,7 +141,9 @@
       if (dotPressed) currentNumDecimals++;
 
       // We get integer and float, to make "0"s appear as decimal when are at right
-      const [integerPart, floatPart] = writerNum.split(".");
+      var splittedNumber = writerNum.split(".");
+      var integerPart = splittedNumber[0];
+      var floatPart = splittedNumber[1];
 
       viewer.innerHTML = numberFormatter(integerPart) + (floatPart ? '.' + floatPart : ''); // Display current number
     };
@@ -179,10 +187,10 @@
 
       // We get decimal count to allow integer operations, 
       // which is safer than with floats
-      const maxNumDecimals = Math.max(currentNumDecimals, oldNumDecimals);
-      const powerOfTenSumOrSubtract = Math.pow(10, maxNumDecimals);
+      var maxNumDecimals = Math.max(currentNumDecimals, oldNumDecimals);
+      var powerOfTenSumOrSubtract = Math.pow(10, maxNumDecimals);
 
-      const powerOfTenMultiplyOrDivide = Math.pow(10, currentNumDecimals + oldNumDecimals);
+      var powerOfTenMultiplyOrDivide = Math.pow(10, currentNumDecimals + oldNumDecimals);
 
       // Perform operation
       switch (operator) {
@@ -248,7 +256,7 @@
     // Bind keyboard events to calculator
     var onKeyPress = function(e) {
       if (debounceButtons) return;
-      let element;
+      var element;
       switch (e.key) {
         // Numbers
         case "1":
@@ -297,7 +305,7 @@
 
       element.focus();
       element.click();
-      setTimeout(() => {
+      setTimeout(function() {
         debounceButtons = false;
         element.blur();
       }, 500);

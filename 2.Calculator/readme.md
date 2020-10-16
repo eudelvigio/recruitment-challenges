@@ -64,6 +64,8 @@ Also I add keyboard interaction on this task, as I consider it a UX improvement.
 
 As mentioned before, as this is a legacy app, I understand there are people using it, so I think, without extra information, that would be risky to modify current layout, maybe can exist some reason to be like is. I planned to make a new layout, and maybe a layout switcher, increasing the major version of the app, as it includes breaking changes. As it is not the case, I only increase minVersion on package json for the improvements done
 
+As a final thing, I realise that there was only js old style, and I was adding const, let, or NumberFormatting api, so I decide to implement everything with older javascript.
+
 ---
 
 # Payvision calculator

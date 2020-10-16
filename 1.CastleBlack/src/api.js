@@ -187,7 +187,18 @@ api.put("/player/:id/steal/:stolenId", function(req, res) {
 
     res.json(player);
   }
+});
 
+
+// Kill player
+api.put("/player/:id/resurrect", function(req, res) {
+  const player = players.find(p => p.id === parseInt(req.params.id));
+  if (player) {
+    player.health = 100;
+    res.json(player);
+  } else {
+    res.status(404).send({});
+  }
 });
 
 

@@ -85,10 +85,10 @@ api.put("/player/:id/arm/:objectId", function(req, res) {
       player['armed'] = parseInt(req.params.objectId);
       res.json(player);
     } else {
-      res.status(400).send();
+      res.status(400).send({});
     }
   } else {
-    res.status(404).send();
+    res.status(404).send({});
   }
 });
 
@@ -113,7 +113,7 @@ api.put("/player/:id/pickup/:objectId", function(req, res) {
     res.status(400).send({});
     return;
   } 
-  
+
   // if another player have objectId error
   if (players.filter(p => p.id !== playerId).some(p => p.bag.includes(objectId))
   ) {

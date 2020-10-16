@@ -170,6 +170,8 @@
 
     // When: Equals is clicked. Calculate result
     var displayNum = function() {
+      // we shouldn't allow to parse a empty writerNum
+      if (!writerNum) return;
       var theNum = parseFloat(writerNum);
 
       // We get decimal count to allow integer operations, 

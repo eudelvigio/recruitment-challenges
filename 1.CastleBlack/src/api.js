@@ -163,6 +163,34 @@ api.put("/player/:id/attack", function(req, res) {
 
 });
 
+
+// Use an object against a player
+api.put("/player/:id/use", function(req, res) {
+  const playerId = parseInt(req.params.id);
+
+  const useCommand = req.body;
+  // if no user against use the object, error
+  if (!players.some(p => p.id === useCommand.against)) {
+    res.status(400).send({});
+    return;
+  }
+
+  const player = players.find(p => p.id === playerId);
+  // if player not exist or not has the object, error
+  if (!player) {
+    res.status(400).send({});
+    return;
+  } else {
+    const useObject = objects.find(o => o.id === useCommand.object);
+    const anotherPlayer = players.find(p => p.id === useCommand.against);
+
+    anotherPlayer.health += useObject.value;
+
+    res.json(player);
+  }
+
+});
+
 // Attack player with object from bag
 api.put("/player/:id/steal/:stolenId", function(req, res) {
   const playerId = parseInt(req.params.id);

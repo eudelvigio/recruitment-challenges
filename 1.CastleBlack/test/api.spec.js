@@ -201,8 +201,10 @@ describe("Bonus Api endpoints", () => {
   test("It should have an endpoint to attack another player with an object from bag", async () => {
     const attackerId = 1;
     const defenderId = 2;
-    const attackObject = await request(app).get(`/object/1`).auth("mol", "123").body;
+    const attackObjectReq = await request(app).get(`/object/1`).auth("mol", "123");
+    const attackObject = attackObjectReq.body;
     const attackObjectIdNotInBag = 2;
+
 
     const badAttackCommand = {
         defender: defenderId,
@@ -220,17 +222,17 @@ describe("Bonus Api endpoints", () => {
         object: attackObject.id
     }
     const responseOk = await request(app)
-      .put(`/player/${playerId}/attack`)
+      .put(`/player/${attackerId}/attack`)
       .auth("mol", "123")
       .send(attackCommand);
     
     expect(responseOk.statusCode).toBe(200);
 
-
-    const player = response.body;
+    const player = responseOk.body;
     checkPlayerDataTypes(player);
   
-    const defender = await request(app).get(`/player/${defenderId}`).auth("mol", "123").body;
+    const defenderReq = await request(app).get(`/player/${defenderId}`).auth("mol", "123");
+    const defender = defenderReq.body;
     
     expect(defender.health).toBe(100 + attackObject.value);
   });

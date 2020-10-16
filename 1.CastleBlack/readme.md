@@ -27,6 +27,8 @@ Maybe the basic authentication is a bit unclear, but I think is enough verbose w
 
 I decided to allow users to have more than one same element, as there is no limitation, seems reasonable to be ok, and simplifies development. The same happens with using a property to indicate destroyed objects instead of deleting them.
 
+Updated postman collection.
+
 ---
 
 # REST API implementation

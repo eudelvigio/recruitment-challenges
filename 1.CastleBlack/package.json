@@ -1,6 +1,6 @@
 {
   "name": "@payvision/fullstack-nightswatch-rest",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Code challenge for fullstack vacancy at Payvision. REST API exercise.",
   "main": "app.js",
   "scripts": {

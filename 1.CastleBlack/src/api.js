@@ -204,6 +204,11 @@ api.put("/player/:id/steal/:stolenId", function(req, res) {
   const playerId = parseInt(req.params.id);
   const stolenId = parseInt(req.params.stolenId);
 
+  // If you try to steal yourself, error
+  if (stolenId === playerId) {
+    res.status(400).send({});
+    return;
+  }
   // if no stolen, error
   if (!players.some(p => p.id === stolenId)) {
     res.status(400).send({});

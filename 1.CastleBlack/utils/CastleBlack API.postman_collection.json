@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "18d1316e-a16d-4f66-ba35-02ed8a6bf5a2",
+		"_postman_id": "32015a77-df81-45e2-96fd-cdce0d1c5ba1",
 		"name": "CastleBlack API",
 		"description": "Sample of all possible requests for CastleBlack API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -110,6 +110,124 @@
 								"player",
 								"1",
 								"kill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attack another player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"defender\": 2, \r\n    \"object\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/attack",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"attack"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Use object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"defender\": 2, \r\n    \"object\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/attack",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"attack"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Steal player endpoint",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/resurrect",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resurrect player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/resurrect",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pickup object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/resurrect",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"resurrect"
 							]
 						}
 					},
@@ -239,7 +357,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "a5e03be6-0646-40c0-b9cc-1168db594e65",
+				"id": "13d2c7ee-e323-415e-b3fb-628b897de178",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -249,7 +367,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "35d957d4-677c-4136-b35d-f10f737fad06",
+				"id": "25c9e083-b9fa-4cf3-9ff9-9b1edf734d7b",
 				"type": "text/javascript",
 				"exec": [
 					""

@@ -103,6 +103,33 @@ api.put("/player/:id/kill", function(req, res) {
   }
 });
 
+// Pick up object no other player has
+api.put("/player/:id/pickup/:objectId", function(req, res) {
+  const playerId = parseInt(req.params.id);
+  const objectId = parseInt(req.params.objectId);
+
+  // if object not exist error
+  if (!objects.some(o => o.id === objectId)) {
+    res.status(400).send({});
+    return;
+  } 
+  
+  // if another player have objectId error
+  if (players.filter(p => p.id !== playerId).some(p => p.bag.includes(objectId))
+  ) {
+    res.status(400).send({});
+    return;
+  }
+
+  const player = players.find(p => p.id === playerId);
+  if (player) {
+    player.bag.push(objectId);
+    res.json(player);
+  } else {
+    res.status(400).send({});
+  }
+});
+
 
 // OBJECTS ENDPOINTS
 

@@ -1,8 +1,14 @@
+const Transaction = require('./Transaction');
+
 class TransactionProcessor {
   // QUESTION: COMPLETE ALL CLASS FUNCTIONS TO PASS THE TESTS
 
   constructor(transactions) {
+    if (!Array.isArray(transactions)) {
+      transactions = [];
+    }
     this.transactions = transactions;
+    this.precission = 2;
   }
 
   print(tx) {
@@ -13,38 +19,61 @@ class TransactionProcessor {
 
   // Check valid transactions rules
   static isValidTransaction(transaction) {
-    // ...
-    return true;
+    const t = new Transaction(transaction);
+    return t.isValid();
   }
 
   // Remove invalid transactions
   filterInvalidTransactions() {
-    // ...
+    const isValid = TransactionProcessor.isValidTransaction;
+    this.transactions = this.transactions.filter(t => !isValid(t));
     return this;
   }
 
   // Return transactions of given currency
   getTransactionsByCurrency(currency) {
-    // ...
+    this.transactions = this.transactions.filter(t => t.currency === currency);
     return this;
   }
 
   // Return transactions of given brand
   getTransactionsByBrand(brand) {
-    // ...
+    this.transactions = this.transactions.filter(t => t.brand === brand);
     return this;
   }
 
   // BONUS:
   // Apply multiple filters. Filters parameter should be an array of functions (predicates)
   filterTransaction(filters) {
-    // ...
+    if (!Array.isArray(filters)) return;
+
+    filters.map(f => {
+      if (f instanceof Function)
+        this.transactions = this.transactions.filter(f);
+        
+    });
     return this;
   }
 
-  // Return the total amount of current transactions array
+  // Return the total amount of current valid transactions array
   sum() {
-    return 0;
+    const isValid = TransactionProcessor.isValidTransaction;
+    const validTransactions = this.transactions.filter(t => isValid(t));
+
+    const powerOfTen = Math.pow(10, this.precission);
+    const preciseAmount = validTransactions.reduce((accumulator, transaction) => {
+      // We use precission to power 10 the amount here, to work with integers only
+      const preciseAmount = Math.round(transaction.amount * powerOfTen);
+      return accumulator + preciseAmount;
+    }, 0);
+
+    // And here we recuperate the original number of decimal elements
+    return preciseAmount / powerOfTen;
+  }
+
+  // Property returning current transactions array length
+  get length() {
+    return this.transactions.length;
   }
 }
 

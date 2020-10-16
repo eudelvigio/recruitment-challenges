@@ -139,3 +139,45 @@ describe("Fluent method", () => {
     expect(processor.getTransactionsByBrand("visa").sum()).toBe(1.01);
   });
 });
+
+
+describe("Bad parameters", () => {
+  beforeAll(() => {
+    processor = new TransactionProcessor(transactions);
+  });
+
+  test("Bad parameters type", () => {
+    const processorWrongParametersString = new TransactionProcessor("A");
+    expect(processorWrongParametersString.transactions).toHaveLength(0);
+
+    const processorWrongParametersNumber = new TransactionProcessor(1);
+    expect(processorWrongParametersNumber.transactions).toHaveLength(0);
+
+    const processorWrongParametersNull = new TransactionProcessor(null);
+    expect(processorWrongParametersNull.transactions).toHaveLength(0);
+
+    const processorWrongParametersUndefined = new TransactionProcessor(undefined);
+    expect(processorWrongParametersUndefined.transactions).toHaveLength(0);
+
+    const processorWrongParametersEmptyObject = new TransactionProcessor({});
+    expect(processorWrongParametersEmptyObject.transactions).toHaveLength(0);
+
+    const processorWrongParametersSimpleArray = new TransactionProcessor([1, 2, 3]);
+    expect(processorWrongParametersSimpleArray.filterInvalidTransactions().transactions).toHaveLength(3);
+    expect(processorWrongParametersSimpleArray.sum()).toBe(0);
+  });
+
+  test("Bad type brand", () => {
+    expect(processor.getTransactionsByBrand(3).sum()).toBe(0);
+    expect(processor.getTransactionsByBrand(null).sum()).toBe(0);
+    expect(processor.getTransactionsByBrand(undefined).sum()).toBe(0);
+    expect(processor.getTransactionsByBrand(['visa']).sum()).toBe(0);
+  });
+
+  test("Bad type currency", () => {
+    expect(processor.getTransactionsByCurrency(3).sum()).toBe(0);
+    expect(processor.getTransactionsByCurrency(null).sum()).toBe(0);
+    expect(processor.getTransactionsByCurrency(undefined).sum()).toBe(0);
+    expect(processor.getTransactionsByCurrency(['visa']).sum()).toBe(0);
+  });
+});

@@ -196,8 +196,6 @@ describe("Bonus Api endpoints", () => {
     
   });
 
-
-
   test("It should have an endpoint to attack another player with an object from bag", async () => {
     const attackerId = 1;
     const defenderId = 2;
@@ -237,4 +235,26 @@ describe("Bonus Api endpoints", () => {
     expect(defender.health).toBe(100 + attackObject.value);
   });
 
+  test("It should have an endpoint to steal all objects another player has", async () => {
+    const stealerId = 1;
+    const stolenId = 2;
+
+    const responseOk = await request(app).put(`/player/${stealerId}/steal/${stolenId}`).auth("mol", "123");
+
+    expect(responseOk.statusCode).toBe(200);
+
+    expect(responseOk.type).toBe("application/json");
+    expect(responseOk.body).toBeInstanceOf(Object);
+
+    const player = responseOk.body;
+    checkPlayerDataTypes(player);
+    expect(player.bag).toHaveLength(3);
+    expect(player.bag).toStrictEqual([1,1,2]);
+
+    const stolenReq = await request(app).get(`/player/${stolenId}`).auth("mol", "123");
+    const stolen = stolenReq.body;
+
+    expect(stolen.bag).toHaveLength(0);
+    
+  });
 });

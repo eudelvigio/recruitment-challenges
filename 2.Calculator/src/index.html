@@ -84,11 +84,15 @@
     width: 2em;
     height: 2em;
     transition: all 0.5s;
+
+    box-shadow: -3px 3px rgba(42, 50, 113, 0.28), -2px 2px rgba(42, 50, 113, 0.28), -1px 1px rgba(42, 50, 113, 0.28);
   }
 
   button:focus {
+    transition: all 0;
     filter: hue-rotate(-90deg);
   }
+  
 </style>
 
 <script>
@@ -242,35 +246,43 @@
         case "8":
         case "9":
         case "0":
+          document.querySelector("[data-num='" + e.key + "']").focus();
           document.querySelector("[data-num='" + e.key + "']").click();
           break;
         case ".":
+          document.querySelector("#dot").focus();
           document.querySelector("#dot").click();
           break;
 
         // Operations
         case "+":
+          document.querySelector("[data-ops='plus']").focus();
           document.querySelector("[data-ops='plus']").click();
           break;
         case "-":
+          document.querySelector("[data-ops='minus']").focus();
           document.querySelector("[data-ops='minus']").click();
           break;
         case "/":
+          document.querySelector("[data-ops='divide']").focus();
           document.querySelector("[data-ops='divide']").click();
           break;
         case "*":
+          document.querySelector("[data-ops='multiply']").focus();
           document.querySelector("[data-ops='multiply']").click();
           break;
 
         // Equals
         case "=":
         case "Enter":
+          document.querySelector("#equals").focus();
           document.querySelector("#equals").click();
           break;
 
         // C
         case "c":
         case "C":
+          document.querySelector("#clear").focus();
           document.querySelector("#clear").click();
           break;
       }

@@ -3,29 +3,30 @@ const api = require("../src/api");
 const express = require("express");
 const bodyParser = require("body-parser");
 
+let app;
+
+const checkPlayerDataTypes = (player) => {
+  expect(player).toBeInstanceOf(Object);
+  expect(player.id).not.toBeNaN();
+  expect(player.name).toMatch(/.+/);
+  expect(player.bag).toBeInstanceOf(Array);
+  expect(player.age).not.toBeNaN();
+  expect(player.health).not.toBeNaN();
+}
+const checkObjectDataTypes = (object) => {
+  expect(object).toBeInstanceOf(Object);
+  expect(object.id).not.toBeNaN();
+  expect(object.name).toMatch(/.+/);
+  expect(object.value).not.toBeNaN();
+}
+
 describe("Api endpoints", () => {
-  let app;
-
-  const checkPlayerDataTypes = (player) => {
-    expect(player).toBeInstanceOf(Object);
-    expect(player.id).not.toBeNaN();
-    expect(player.name).toMatch(/.+/);
-    expect(player.bag).toBeInstanceOf(Array);
-    expect(player.age).not.toBeNaN();
-    expect(player.health).not.toBeNaN();
-  }
-  const checkObjectDataTypes = (object) => {
-    expect(object).toBeInstanceOf(Object);
-    expect(object.id).not.toBeNaN();
-    expect(object.name).toMatch(/.+/);
-    expect(object.value).not.toBeNaN();
-  }
-
   beforeAll(() => {
     app = express();
     app.use(bodyParser.json());
     app.use(api);
   });
+
   test("It should have an endpoint to get a player list", async () => {
     const response = await request(app).get("/player/list").auth("mol", "123");
 
@@ -34,6 +35,7 @@ describe("Api endpoints", () => {
     expect(response.body).toBeInstanceOf(Array);
     response.body.map(p => checkPlayerDataTypes(p));
   });
+
   test("It should have an endpoint to get particular player info", async () => {
     const playerId = 1;
     const response = await request(app).get(`/player/${playerId}`).auth("mol", "123");
@@ -45,6 +47,7 @@ describe("Api endpoints", () => {
     checkPlayerDataTypes(player);
     expect(player.id).toBe(playerId);
   });
+
   test("It should have an endpoint to create new players", async () => {
     const newPlayer = {
         name: "Manolo",
@@ -160,5 +163,36 @@ describe("Api endpoints", () => {
     checkObjectDataTypes(object);
     expect(object.id).toBe(objectId);
     expect(object.destroyed).toBe(true);
+  });
+});
+
+describe("Bonus Api endpoints", () => {
+
+  beforeAll(() => {
+    app = express();
+    app.use(bodyParser.json());
+    app.use(api);
+  });
+  test("It should have an endpoint to pickup one object no other player has", async () => {
+    const playerId = 1;
+    const existingObject = 2;
+    const newObjectId = 1;
+
+    const responseBad = await request(app).get(`/player/${playerId}/pickup/${existingObject}`).auth("mol", "123");
+
+    expect(responseBad.statusCode).toBe(400);
+
+    const responseOk = await request(app).get(`/player/${playerId}/pickup/${newObjectId}`).auth("mol", "123");
+
+    expect(responseOk.statusCode).toBe(400);
+
+    expect(response.type).toBe("application/json");
+    expect(response.body).toBeInstanceOf(Object);
+
+    const player = response.body;
+    checkPlayerDataTypes(player);
+    expect(player.bag).toHaveLength(2);
+    expect(player.bag).toStrictEqual([1,1]);
+    
   });
 });

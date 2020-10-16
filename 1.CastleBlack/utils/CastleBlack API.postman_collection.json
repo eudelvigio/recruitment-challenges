@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "32015a77-df81-45e2-96fd-cdce0d1c5ba1",
+		"name": "CastleBlack API",
+		"description": "Sample of all possible requests for CastleBlack API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Players",
+			"item": [
+				{
+					"name": "List players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/list",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new player",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"name\": \"Jona Snowa\", \r\n    \"age\": 23, \r\n    \"health\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/player",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get player by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Arm player with object from his bag",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/arm/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"arm",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kill player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/kill",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"kill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attack another player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"defender\": 2, \r\n    \"object\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/attack",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"attack"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Use object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"against\": 1, \r\n    \"object\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/use",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"use"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Steal player endpoint",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/steal/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"steal",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resurrect player",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/resurrect",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"resurrect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pickup object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/player/1/pickup/2",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"player",
+								"1",
+								"pickup",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Objects",
+			"item": [
+				{
+					"name": "Create new object",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Longsword\",\r\n    \"value\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/object",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get object by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/object/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upgrade object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": -100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/object/1/upgrade",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object",
+								"1",
+								"upgrade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy object",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/object/1/destroy",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"object",
+								"1",
+								"destroy"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "mol",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "13d2c7ee-e323-415e-b3fb-628b897de178",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "25c9e083-b9fa-4cf3-9ff9-9b1edf734d7b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b7c0b200-2f97-4c3e-ac89-a5711b3049c3",
+			"key": "BASE_URL",
+			"value": "http://localhost:8080"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

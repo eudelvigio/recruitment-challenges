@@ -225,7 +225,7 @@ api.put("/player/:id/resurrect", function(req, res) {
     player.health = 100;
     res.json(player);
   } else {
-    res.status(404).send({});
+    res.status(400).send({});
   }
 });
 

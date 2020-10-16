@@ -60,7 +60,7 @@ Also, I have refactorized a bit the app, like one `el` to header, and also the w
 
 I did several improvements to UI and UX, like formatting numbers, allowing scroll on result viewer, and an effect when button is pressed.
 
-Also I add keyboard interaction on this task, as I consider it a UX improvement. I found several issues when writing fast with keyboard, so I decide to limit speed here. Also, I found a test issue, as it was added after the development, on decimal numbers. I decide to use a numberformat from Intl package, and I was having issues with numbers with more than 2 decimals, as `writerNum` variable was still accepting more decimals. So I added a new variable setting max decimal numbers, both for the numberFormatter and writerNum.
+Also I add keyboard interaction on this task, as I consider it a UX improvement. I found several issues when writing fast with keyboard, so I decide to limit speed here. Also, I found a issue thanks to the tests, on decimal numbers. I decide to use a numberformat from Intl package, and I was having issues with numbers with more than 2 decimals, as `writerNum` variable was still accepting more decimals. So I added a new variable setting max decimal numbers, both for the numberFormatter and writerNum.
 
 As mentioned before, as this is a legacy app, I understand there are people using it, so I think, without extra information, that would be risky to modify current layout, maybe can exist some reason to be like is. I planned to make a new layout, and maybe a layout switcher, increasing the major version of the app, as it includes breaking changes. As it is not the case, I only increase minVersion on package json for the improvements done
 

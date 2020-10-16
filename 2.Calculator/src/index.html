@@ -100,6 +100,7 @@
       ops = els(".ops"), // List of operators
       clear = el("#clear"), // C button
       dot = el("#dot"), // Dot button
+      calculator = el("#calculator"), // Full calculator
       writerNum = "", // Variable to store and simplify number adding
       currentNumDecimals = 0, // Number of decimals of current writing number
       oldNum = 0, // First number
@@ -158,35 +159,36 @@
       // We get decimal count to allow integer operations, 
       // which is safer than with floats
       const maxNumDecimals = Math.max(currentNumDecimals, oldNumDecimals);
-      const powerOfTenToApply = Math.pow(10, maxNumDecimals);
-      const theNumAsInteger = theNum * powerOfTenToApply;
-      const oldNumAsInteger = oldNum * powerOfTenToApply;
+      const powerOfTenSumOrSubtract = Math.pow(10, maxNumDecimals);
+
+      const powerOfTenMultiplyOrDivide = Math.pow(10, currentNumDecimals + oldNumDecimals);
 
       // Perform operation
       switch (operator) {
         case "minus":
-          resultNum = oldNumAsInteger - theNumAsInteger;
-          resultNum = resultNum / powerOfTenToApply;
+          resultNum = (oldNum * powerOfTenSumOrSubtract) - (theNum * powerOfTenSumOrSubtract);
+          resultNum = resultNum / powerOfTenSumOrSubtract;
           break;
 
         case "plus":
-          resultNum = oldNumAsInteger + theNumAsInteger;
-          resultNum = resultNum / powerOfTenToApply;
+          resultNum = (oldNum * powerOfTenSumOrSubtract) + (theNum * powerOfTenSumOrSubtract);
+          resultNum = resultNum / powerOfTenSumOrSubtract;
           break;
 
-          // When multiplying, we use directly the float numbers
         case "multiply":
-          resultNum = oldNum * theNum;
+
+          resultNum = oldNum * theNum * powerOfTenMultiplyOrDivide;
+          resultNum = Math.round(resultNum) / powerOfTenMultiplyOrDivide;
           break;
 
-          // When dividing, we use directly the float numbers
         case "divide":
-          resultNum = oldNum / theNum;
+          resultNum = (oldNum / theNum) * powerOfTenMultiplyOrDivide;
+          resultNum = Math.round(resultNum) / powerOfTenMultiplyOrDivide;
           break;
 
         // If equal is pressed without an operator, keep number and continue
         default:
-          resultNum = theNumAsInteger / powerOfTenToApply;
+          resultNum = theNumAsInteger;
       }
 
 
@@ -198,7 +200,7 @@
         } else {
           // If result is infinity, set off by dividing by zero
           displayResult("Look at what you've done");
-          el("#calculator").classList.add("broken"); // Break calculator
+          calculator.classList.add("broken"); // Break calculator
         }
       } else {
         // Display result, finally!

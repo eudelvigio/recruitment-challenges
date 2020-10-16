@@ -47,7 +47,7 @@ As an update was done to the app, and it is a improvement, we should increase pa
 
 4. How would do you test this app?
 
-As it is something like an html page, I think best way to test application in its current state is to use JSDOM with jest, having the capability of test clicks and expect results, it has something from both unit tests, and end to end tests, and I find this approach ideal for this scenario
+As it is something like an html page, I think best way to test application in its current state is to use JSDOM with jest, having the capability of test clicks and expect results, it has end to end tests, and I find this approach ideal for this scenario
 
 If the application is allowed to be partitioned because its usage is not coupled to being only one html page, would be interesant to make functional tests too for the js part
 

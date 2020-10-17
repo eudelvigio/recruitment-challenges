@@ -184,7 +184,7 @@
 
     // When: Equals is clicked. Calculate result
     var displayNum = function() {
-      // we shouldn't allow to parse a empty writerNum
+      // we shouldn't allow to parse a empty writerNum or trying to operate without oldNum
       if (!writerNum || !oldNum) return;
       var theNum = parseFloat(writerNum);
 

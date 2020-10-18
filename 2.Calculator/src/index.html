@@ -112,7 +112,6 @@
       writerNum = "", // Variable to store and simplify number adding
       currentNumDecimals = 0, // Number of decimals of current writing number
       oldNum, // First number
-      oldNumDecimals = 0, // Number of decimals of First number
       resultNum, // Result
       operator, // Batman,
       maxDecimals = 10, // maximum allowed number of decimals
@@ -172,7 +171,6 @@
         displayNum();
       }
       oldNum = parseFloat(writerNum);
-      oldNumDecimals = currentNumDecimals;
       currentNumDecimals = 0;
 
       writerNum = "";
@@ -236,7 +234,6 @@
 
       // Now reset oldNum & keep result
       oldNum = undefined;
-      oldNumDecimals = 0;
       writerNum = resultNum.toString();
       dotPressed = false;
     };
@@ -244,7 +241,6 @@
     // When: Clear button is pressed. Clear everything
     var clearAll = function() {
       oldNum = undefined;
-      oldNumDecimals = 0;
       writerNum = "";
       dotPressed = false;
 

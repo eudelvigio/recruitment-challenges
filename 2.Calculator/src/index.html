@@ -150,11 +150,14 @@
 
     // When: Dot is clicked. Set dotpressed true
     var addDot = function() {
+      // do not do anything if we pressed before the dot on this number
       if (!dotPressed) {
+        // should act as another number key, if there are a result, restart
         if (resultNum) {
           writerNum = "0";
           resultNum = 0;
         }
+        // avoiding ".", as it gives error when formatting
         if (!writerNum) {
           writerNum = "0";
         }
@@ -167,6 +170,7 @@
 
     // When: Operator is clicked. Pass number to oldNum and save operator
     var moveNum = function() {
+      // If we don't have oldNum, show current result again
       if (oldNum !== undefined) {
         displayNum();
       }

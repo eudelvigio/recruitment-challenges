@@ -223,7 +223,7 @@ describe("Calculator tests", () => {
 
     const result = dom.window.document.querySelector("#viewer");
 
-    expect(result.innerHTML).toBe("2.5");
+    expect(result.innerHTML).toBe("1.5");
   });
 
   test("Divide by 0", async () => {

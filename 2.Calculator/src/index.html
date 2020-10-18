@@ -101,13 +101,6 @@
     var el = document.querySelector.bind(document);
     var els = document.querySelectorAll.bind(document);
 
-    // Defensive way to get a valid number formatter
-    var numberFormatter = function (input) { return input; }
-    if (Intl) {
-      numberFormatter = new Intl.NumberFormat(["en"], {maximumFractionDigits: maxDecimals}).format;
-    }
-
-
     // Variables
     var viewer = el("#viewer"), // Calculator screen where result is displayed
       equals = el("#equals"), // Equal button
@@ -124,7 +117,15 @@
       operator, // Batman,
       maxDecimals = 10, // maximum allowed number of decimals
       debounceButtons = false, // debouncer for numbers
-      dotPressed = false; 
+      dotPressed = false, // Control variable allowing to manage dot pressing 
+      powerOfTen = Math.pow(10, maxDecimals); // Power of ten to operate with integers
+
+
+    // Defensive way to get a valid number formatter
+    var numberFormatter = function (input) { return input; }
+    if (Intl) {
+      numberFormatter = new Intl.NumberFormat(["en"], {maximumFractionDigits: maxDecimals}).format;
+    }
 
     // When: Number is clicked. Get the current number selected
     var setNum = function() {
@@ -188,34 +189,28 @@
       if (!writerNum || !oldNum) return;
       var theNum = parseFloat(writerNum);
 
-      // We get decimal count to allow integer operations, 
-      // which is safer than with floats
-      var maxNumDecimals = Math.max(currentNumDecimals, oldNumDecimals);
-      var powerOfTenSumOrSubtract = Math.pow(10, maxNumDecimals);
-
-      var powerOfTenMultiplyOrDivide = Math.pow(10, currentNumDecimals + oldNumDecimals);
-
-      // Perform operation
+      // Perform operation. We will use the powerOfTen variable to modify
+      // theNum and oldNum, to perform integer operations
       switch (operator) {
         case "minus":
-          resultNum = (oldNum * powerOfTenSumOrSubtract) - (theNum * powerOfTenSumOrSubtract);
-          resultNum = resultNum / powerOfTenSumOrSubtract;
+          resultNum = (oldNum * powerOfTen) - (theNum * powerOfTen);
+          resultNum = resultNum / powerOfTen;
           break;
 
         case "plus":
-          resultNum = (oldNum * powerOfTenSumOrSubtract) + (theNum * powerOfTenSumOrSubtract);
-          resultNum = resultNum / powerOfTenSumOrSubtract;
+          resultNum = (oldNum * powerOfTen) + (theNum * powerOfTen);
+          resultNum = resultNum / powerOfTen;
           break;
 
         case "multiply":
 
-          resultNum = oldNum * theNum * powerOfTenMultiplyOrDivide;
-          resultNum = Math.round(resultNum) / powerOfTenMultiplyOrDivide;
+          resultNum = oldNum * theNum * powerOfTen;
+          resultNum = Math.round(resultNum) / powerOfTen;
           break;
 
         case "divide":
-          resultNum = (oldNum / theNum) * powerOfTenMultiplyOrDivide;
-          resultNum = Math.round(resultNum) / powerOfTenMultiplyOrDivide;
+          resultNum = (oldNum / theNum) * powerOfTen;
+          resultNum = Math.round(resultNum) / powerOfTen;
           break;
 
         // If equal is pressed without an operator, keep number and continue

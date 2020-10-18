@@ -206,6 +206,26 @@ describe("Calculator tests", () => {
     expect(result.innerHTML).toBe("200.3");
   });
 
+  test("Divide int numbers which leads to a decimal result ", async () => {
+    const numberThree = dom.window.document.querySelector("[data-num='3']");
+    const numberTwo = dom.window.document.querySelector("[data-num='2']");
+
+    const divide = dom.window.document.querySelector("[data-ops='divide']");
+    const equalSign = dom.window.document.querySelector("#equals");
+
+    await numberThree.click();
+
+    await divide.click();
+
+    await numberTwo.click();
+
+    await equalSign.click();
+
+    const result = dom.window.document.querySelector("#viewer");
+
+    expect(result.innerHTML).toBe("2.5");
+  });
+
   test("Divide by 0", async () => {
     const numberZero = dom.window.document.querySelector("[data-num='0']");
     const numberFour = dom.window.document.querySelector("[data-num='4']");

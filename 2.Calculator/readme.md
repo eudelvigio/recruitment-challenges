@@ -68,6 +68,13 @@ As a final thing, I realise that there was only js old style, and I was adding c
 
 ---
 
+## Update weekend
+
+After have been thinking about it this weekend, I realise that the algorithm to calculate decimal numbers, while is working on sums, have issues on another operations when the result have more decimals than the number of decimals of operands, so I decide to change it, maintaining integer operation, but having a fixed numbers of decimals always. I wrote some tests to check it, and I'm going to use the maxNumDecimals variable to manage it
+
+
+---
+
 # Payvision calculator
 
 In this exercise you are given the legacy code of Payvision Calculator web app. Maintainance and new features development is your responsability.
